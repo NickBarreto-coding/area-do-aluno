@@ -1,0 +1,49 @@
+/* app/assets/css/main.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*  tema base pra dar identidade e não ficar “cru” */
+@layer components {
+  .mesh-bg {
+    background:
+      radial-gradient(900px circle at 20% 10%, rgba(99,102,241,0.18), transparent 45%),
+      radial-gradient(700px circle at 80% 20%, rgba(16,185,129,0.14), transparent 40%),
+      radial-gradient(800px circle at 60% 80%, rgba(56,189,248,0.12), transparent 45%),
+      linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0.35));
+  }
+
+  .glass {
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(15,23,42,0.08);
+  }
+
+  .card {
+    @apply glass rounded-3xl shadow-[0_12px_40px_-20px_rgba(15,23,42,0.35)];
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-2 text-sm font-semibold
+      transition-transform duration-150 ease-out active:scale-[0.98]
+      focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn text-white shadow-lg shadow-indigo-500/20;
+    background: linear-gradient(135deg, rgb(99,102,241), rgb(16,185,129));
+  }
+
+  .btn-ghost {
+    @apply btn bg-white/60 text-slate-900 hover:bg-white/80 border border-slate-900/10;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .badge-soft {
+    @apply bg-white/60 border border-slate-900/10 text-slate-700;
+  }
+}

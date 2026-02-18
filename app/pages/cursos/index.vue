@@ -1,11 +1,31 @@
+<!-- app/pages/cursos/index.vue -->
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <header class="border-b border-gray-200 bg-white">
+  <div>
+    <header class="sticky top-0 z-20 border-b border-slate-900/10 bg-white/50 backdrop-blur">
       <div class="mx-auto max-w-6xl px-4 py-6">
-        <h1 class="text-2xl font-bold text-gray-900">Meus Cursos</h1>
-        <p class="mt-1 text-sm text-gray-600">
-          Seus cursos disponíveis para assistir e acompanhar o progresso.
-        </p>
+        <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div
+              class="inline-flex items-center gap-2 rounded-full bg-white/60 px-3 py-1 text-xs font-semibold text-slate-700 border border-slate-900/10"
+            >
+              <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+              Área do Aluno
+            </div>
+
+            <h1 class="mt-3 text-3xl font-black tracking-tight text-slate-900">
+              Meus Cursos
+            </h1>
+
+            <p class="mt-1 text-sm text-slate-600">
+              Continue de onde parou — e sem culpa se for “só mais uma aula”.
+            </p>
+          </div>
+
+          <div class="text-sm text-slate-600">
+            <span class="font-semibold text-slate-900">{{ filteredCourses.length }}</span>
+            curso(s) no filtro
+          </div>
+        </div>
 
         <div class="mt-5">
           <FilterBar
@@ -20,14 +40,14 @@
 
     <main class="mx-auto max-w-6xl px-4 py-8">
       <div class="mb-4 flex items-center justify-between">
-        <p class="text-sm text-gray-600">
-          <span class="font-semibold text-gray-900">{{ filteredCourses.length }}</span>
+        <p class="text-sm text-slate-600">
+          <span class="font-semibold text-slate-900">{{ filteredCourses.length }}</span>
           resultados
         </p>
 
         <button
           type="button"
-          class="text-sm font-semibold text-blue-700 hover:text-blue-800"
+          class="text-sm font-semibold text-indigo-700 hover:text-indigo-800"
           @click="resetFilters"
         >
           Limpar filtros
@@ -62,14 +82,11 @@
 </template>
 
 <script setup lang="ts">
-import CourseCard from '~/components/CourseCard.vue'
-import FilterBar from '~/components/FilterBar.vue'
-import SkeletonCourseCard from '~/components/SkeletonCourseCard.vue'
-import EmptyState from '~/components/EmptyState.vue'
 import { useCourses } from '~/composables/useCourses'
 import type { CourseStatus } from '~/types/course'
 import { computeCourseStatus } from '~/utils/computeProgress'
 
+// Comentário humano: aqui é “tudo mock”, então simulo loading só pra UX não ficar seca.
 const { courses, isLoading } = useCourses()
 
 const search = ref('')
@@ -78,14 +95,13 @@ const status = ref<'all' | CourseStatus>('all')
 const filteredCourses = computed(() => {
   const q = search.value.trim().toLowerCase()
 
-  return courses.value
-    .filter((c) => {
-      const matchesSearch = !q || c.title.toLowerCase().includes(q)
-      if (!matchesSearch) return false
+  return courses.value.filter((c) => {
+    const matchesSearch = !q || c.title.toLowerCase().includes(q)
+    if (!matchesSearch) return false
 
-      if (status.value === 'all') return true
-      return computeCourseStatus(c.lessons) === status.value
-    })
+    if (status.value === 'all') return true
+    return computeCourseStatus(c.lessons) === status.value
+  })
 })
 
 function resetFilters() {
