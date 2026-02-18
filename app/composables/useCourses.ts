@@ -3,13 +3,14 @@ import { courses as mockCourses } from '~/data/courses'
 import type { Course } from '~/types/course'
 
 export function useCourses() {
-  // Comentário humano:
-  // useAsyncData roda no server durante o prerender, então o HTML já nasce com conteúdo.
   const { data, pending, refresh } = useAsyncData<Course[]>(
     'courses',
     async () => {
-      // delay leve só pra mostrar skeleton sem virar novela
-      await new Promise((r) => setTimeout(r, 250))
+      //  no SSG eu não quero “atrasar” o build.
+      // O delay só entra no client pra skeleton existir de forma bonita.
+      if (process.client) {
+        await new Promise((r) => setTimeout(r, 250))
+      }
       return mockCourses
     },
     { default: () => [] }

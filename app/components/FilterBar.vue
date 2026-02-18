@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import type { CourseStatus } from '~/types/course'
 
-// Comentário humano:
+// Comentário 
 // Esse componente é "controlado": o estado real mora no pai.
 // Aqui eu uso estado local só pra deixar a digitação suave e não ficar travando a UI.
 

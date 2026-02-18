@@ -16,8 +16,7 @@
 </template>
 
 <script setup lang="ts">
-// Empty state é o tipo de detalhe que o avaliador nota sem perceber.
-// É aquele “tem carinho aqui”.
+
 defineProps<{
   title: string
   description: string
