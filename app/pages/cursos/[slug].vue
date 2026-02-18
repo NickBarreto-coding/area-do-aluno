@@ -26,14 +26,7 @@
         <div class="rounded-2xl border border-gray-200 bg-white h-[320px] animate-pulse"></div>
       </div>
 
-      <div v-else-if="notFound">
-        <EmptyState
-          title="Curso não encontrado"
-          description="Esse curso não existe (ou o slug mudou). Volte para a listagem."
-          action-label="Voltar"
-          @action="navigateTo('/cursos')"
-        />
-      </div>
+    
 
       <div v-else-if="course" class="grid gap-4 lg:grid-cols-[1fr_360px]">
         <!-- Player -->
@@ -92,7 +85,7 @@ const route = useRoute()
 const slug = String(route.params.slug || '')
 
 // carrega curso mockado
-const { course, isLoading, notFound } = useCourse(slug)
+const { course, isLoading, } = useCourse(slug)
 
 // Aula selecionada (por índice)
 const selectedIndex = ref(0)

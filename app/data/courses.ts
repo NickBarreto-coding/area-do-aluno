@@ -1,5 +1,6 @@
 // data/courses.ts
-import type { Course } from '~/types/course'
+import type { Course } from '../types/course'
+
 
 // Mock bem “realista”: 3 cursos, cada um com 8+ aulas, materiais e progresso variado.
 // Importante pro teste: isso aqui precisa ser consistente e ter volume mínimo.
