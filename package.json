@@ -3,11 +3,14 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
+    "typecheck": "nuxt typecheck",
+    "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "preview:static": "npx serve .output/public",
+    "postinstall": "nuxt prepare",
+    "check": "nuxt typecheck && nuxt generate"
   },
   "dependencies": {
     "nuxt": "^4.3.1",

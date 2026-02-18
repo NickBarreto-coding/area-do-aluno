@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', '@vite-pwa/nuxt'],
   css: ['~/assets/css/main.css'],
 
+  // Eu deixo isso explícito pra garantir SSG de verdade no generate.
   nitro: {
     preset: 'static',
     prerender: {
@@ -14,13 +15,13 @@ export default defineNuxtConfig({
     },
   },
 
-  // recomendado pelo warn do Nuxt/Nitro
+  // Recomendado pelo warn do Nuxt/Nitro (evita comportamento “mudando” conforme versões).
   compatibilityDate: '2026-02-18',
 
   pwa: {
     registerType: 'autoUpdate', // evita “cache eterno”
     devOptions: {
-      enabled: false, // <- ESSENCIAL: não cachear no dev
+      enabled: false, // essencial: não registrar SW no dev (senão o HMR vira loteria)
     },
     manifest: {
       name: 'Área do Aluno',
@@ -32,7 +33,12 @@ export default defineNuxtConfig({
       icons: [
         { src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png' },
         { src: '/pwa-512x512.png', sizes: '512x512', type: 'image/png' },
-        { src: '/pwa-512x512-maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+        {
+          src: '/pwa-512x512-maskable.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'maskable',
+        },
       ],
     },
   },
