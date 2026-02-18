@@ -86,7 +86,7 @@ import { useCourses } from '~/composables/useCourses'
 import type { CourseStatus } from '~/types/course'
 import { computeCourseStatus } from '~/utils/computeProgress'
 
-// Comentário humano: aqui é “tudo mock”, então simulo loading só pra UX não ficar seca.
+//  aqui é “tudo mock”, então simulo loading só pra UX não ficar seca.
 const { courses, isLoading } = useCourses()
 
 const search = ref('')
